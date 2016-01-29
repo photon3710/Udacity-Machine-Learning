@@ -1,0 +1,22 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf340
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red28\green28\blue28;\red255\green255\blue255;}
+\margl1440\margr1440\vieww28600\viewh15180\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs72 \cf0 Answer: Support vector classifier is a learning model with associated learning algorithms that analyze training data used for classification. The training examples \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 are a collection of data points. These points can be specified with vectors such as coordinate vectors (x1, x2) of positions. Each data point is also marked for belonging to one of two categories. Given the training examples, A support vector classifier can learn the training data to build a model that assigns new examples into one category or the other. These separate categories are divided by a clear gap that is as wide as possible. New examples are then predicted to belong to a category based on which side of the gap they fall on.\cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+The learning process of the algorithm is to tune a set of parameters to maximize the distance between two lines and find the widest gap, also called margin width which divides the separate categories.  As shown in the graph below, the two lines by which the green and red dots region are bounded can be expressed by a1*x1 + a2*x2 - b = 1 and a1*x1 + a2*x2 - b = -1, respectively. The a1, a2, b are all tuning parameters. The points (x1,x2) are training data points. By making the distance 2/sqrt(a1^2 + a2^2) the largest, we find a set of parameters that can distinguish the two groups of data. In the process, the data points on the boundaries are the most important for the determination of the gap. Therefore, 
+\fs24 {{\NeXTGraphic BB30626A-8DAE-4EBD-A5C2-685EB6AA6E44.tiff \width5320 \height3800
+}¬}
+\fs72 \
+the data vectors associated with these data points are called support vectors.\
+\
+\
+\
+During the optimization of the distance, the correlation between any two of the data points have to be calculated. The function that return this value is called kernel function. Typical kernel functions are dot product, the square of the dot product and so on. For example, by using the square of the dot product, two-dimension data points are actually mapped onto a three dimensions space. And separation may be easier in higher dimensions for the nonlinear case as shown in the left plot below. 
+\fs24 {{\NeXTGraphic Pasted Graphic 1.tiff \width11280 \height6600
+}¬}\
+
+\fs72 It is clear that there is no line which can separate the green and red dots. After applying the kernel function, the square of the dot product on any pair of data points and mapping the data points onto three dimensions, a plane can be drawn to separate two groups of data. A plane in the three dimensions is a counterpart of a line in two dimensions. In the case of the state space with more than two dimensions, the counterpart of a line is called a hyperplane. In all, with the kernel trick, support vector classifier can use linear functions to separate non-linear separable datasets by adding more information into any pair of data points. This priori experience for the data is the bias. }
