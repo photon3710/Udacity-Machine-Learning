@@ -2,7 +2,7 @@
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;}
 {\colortbl;\red255\green255\blue255;\red255\green0\blue0;\red191\green191\blue191;\red0\green0\blue255;
 }
-\margl1440\margr1440\vieww28600\viewh15240\viewkind0
+\margl1440\margr1440\vieww28600\viewh15180\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \f0\fs48 \cf0 Name: Yongchao Tang\
@@ -420,6 +420,7 @@ Based on the limited resources, cost, I choose SVC as the most proper model for 
 \cf0 \
 In 1-3 paragraphs explain to the board of supervisors in layman\'92s terms how the final model chosen is supposed to work (for example if you chose a decision tree or support vector machine, how does it learn to make a prediction).\
 \cf2 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\cf2 \
 Answer: Support vector classifier is a learning model with associated learning algorithms that analyze training data used for classification. The training examples \expnd0\expndtw0\kerning0
 are a collection of data points. These points can be specified with vectors such as coordinate vectors (x1, x2) of positions. Each data point is also marked for belonging to one of two categories. Given the training examples, A support vector classifier can learn the training data to build a model that assigns new examples into one category or the other. These separate categories are divided by a clear gap that is as wide as possible. New examples are then predicted to belong to a category based on which side of the gap they fall on.\kerning1\expnd0\expndtw0 \
@@ -428,12 +429,11 @@ The learning process of the algorithm is to tune a set of parameters to maximize
 }¬}\
 the data vectors associated with these data points are called support vectors.\
 \
-\
-\
 During the optimization of the distance, the correlation between any two of the data points have to be calculated. The function that return this value is called kernel function. Typical kernel functions are dot product, the square of the dot product and so on. For example, by using the square of the dot product, two-dimension data points are actually mapped onto a three dimensions space. And separation may be easier in higher dimensions for the nonlinear case as shown in the left plot below. {{\NeXTGraphic Pasted Graphic 1.tiff \width11280 \height6600
 }¬}\
 It is clear that there is no line which can separate the green and red dots. After applying the kernel function, the square of the dot product on any pair of data points and mapping the data points onto three dimensions, a plane can be drawn to separate two groups of data. A plane in the three dimensions is a counterpart of a line in two dimensions. In the case of the state space with more than two dimensions, the counterpart of a line is called a hyperplane. In all, with the kernel trick, support vector classifier can use linear functions to separate non-linear separable datasets by adding more information into any pair of data points. This priori experience for the data is the bias. \
 \cf4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf2 \
 \cf0 \
 Fine-tune the model. Use gridsearch with at least one important parameter tuned and with at least 3 settings. Use the entire training set for this.\
