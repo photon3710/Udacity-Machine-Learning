@@ -2,11 +2,11 @@
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\fnil\fcharset0 HelveticaNeue;
 \f3\fmodern\fcharset0 Courier;}
 {\colortbl;\red255\green255\blue255;\red255\green0\blue0;\red191\green191\blue191;\red0\green0\blue255;
-\red255\green255\blue255;\red36\green36\blue36;\red0\green0\blue0;}
+}
 \margl1440\margr1440\vieww28600\viewh15180\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f0\fs48 \cf0 Name: Yongchao Tang\
+\f0\fs24 \cf0 Name: Yongchao Tang\
 Email: yongchaotang@gmail.com\
 \
 Questions and Report Structure\
@@ -446,27 +446,26 @@ What is the model\'92s final F1 score\
 Actually, I found that if I set the gamma:[0, 1], the grid search method will return the result in which gamma = 0, instead of the best parameter I found gamma = 0.1 for the test set. I think that the optimal parameter calculated for the training set may not be optimal for the test set. As I have found from the fluctuation of f1 score on training set with K neighbours classification, the training set may have unbalanced data. Therefore, the grid search method may not be effective for the unbalanced data.\
 \
 With help of the reviewer, I used 
-\f2 \cb5 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec6 the stratified shuffle split data-split to 
-\f0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 ge
-\f2 \cb5 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec6 t over the fact that the dataset is strongly imbalanced towards one of the two target labels. The stratified shuffle split the training data into groups with almost the same percentage of positive over negative as the others, thereby reducing the harmful effect of the unbalanced data structure. As a result, when I set the iteration number as n_iter = 30, the grid search method find the optimal model parameters. 
-\f0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\f2 \expnd0\expndtw0\kerning0
+the stratified shuffle split data-split to 
+\f0 \kerning1\expnd0\expndtw0 ge
+\f2 \expnd0\expndtw0\kerning0
+t over the fact that the dataset is strongly imbalanced towards one of the two target labels. The stratified shuffle split the training data into groups with almost the same percentage of positive over negative as the others, thereby reducing the harmful effect of the unbalanced data structure. As a result, when I set the iteration number as n_iter = 30, the grid search method find the optimal model parameters. 
+\f0 \kerning1\expnd0\expndtw0 \
 \
 parameters = \{ 'C' : [ 0.1, 1, 10, 100, 1000 ], 'gamma' : [ 0.0001, 0.001, 0.1, 10, 100 ] \} # Some SVC parameters\
 ssscv = StratifiedShuffleSplit( y_train, n_iter=30, test_size=0.1) # 1. Let's build a stratified shuffle object\
 \
 \pard\pardeftab720\sl340\partightenfactor0
 
-\f3 \cf2 \cb5 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec7 Final Model: \
+\f3 \cf2 \expnd0\expndtw0\kerning0
+Final Model: \
 Best params: \{'C': 1, 'gamma': 0.1\}\
 Prediction time (secs): 0.0058\
 F1 score for training set: 0.971698113208\
 Prediction time (secs): 0.0017\
-F1 score for test set: 0.791946308725
-\fs28 \cf7 \
+F1 score for test set: 0.791946308725\cf0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f0\fs48 \cf2 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\f0 \cf2 \kerning1\expnd0\expndtw0 \
 }
