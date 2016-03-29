@@ -47,8 +47,8 @@ class LearningAgent(Agent):
         deadline = self.env.get_deadline(self)
 
         # TODO: Update state
-        self.state = inputs        
-        s = self.getStateIndex(inputs, self.next_waypoint)
+        self.state = (self.next_waypoint, inputs['light'], inputs['left'], inputs['oncoming'])        
+        s = self.getStateIndex(self.state)
 		       		
         # TODO: Select action according to your policy        
         if self.count < 200:       
@@ -86,25 +86,25 @@ class LearningAgent(Agent):
         # TODO: Learn policy based on state, action, reward
         self.next_waypoint = self.planner.next_waypoint()  # from route planner, also displayed by simulator
         inputs = self.env.sense(self)
-        sNext = self.getStateIndex(inputs, self.next_waypoint)
+        sNext = self.getStateIndex(self.state)
 		
         self.Q[s,a] = (1-self.alpha) * self.Q[s,a] + self.alpha * ( reward + self.gamma * np.amax(self.Q[sNext,:]) )
 
         # print "LearningAgent.update(): deadline = {}, inputs = {}, action = {}, reward = {}".format(deadline, inputs, action, reward)  # [debug]
 
-    def getStateIndex(self, inputs, next_waypoint):
-        if next_waypoint == 'forward':
+    def getStateIndex(self, state):
+        if state[0] == 'forward':
             n = 0
-        elif next_waypoint == 'right':
+        elif state[0] == 'right':
             n = 1
-        elif next_waypoint == 'left':
+        elif state[0] == 'left':
             n = 2
             
-        if inputs['light'] == 'red' and inputs['left'] == 'forward':
+        if state[1] == 'red' and state[2] == 'forward':
             s = 0
-        elif inputs['light'] == 'red' and inputs['left'] != 'forward':
+        elif state[1] == 'red' and state[2] != 'forward':
             s = 1
-        elif inputs['light'] == 'green' and (inputs['oncoming'] == 'forward' or inputs['oncoming'] == 'right'):
+        elif state[1] == 'green' and (state[3] == 'forward' or state[3] == 'right'):
             s = 2
         else:
             s = 3
@@ -113,8 +113,8 @@ class LearningAgent(Agent):
 def run():
     """Run the agent for a finite number of trials."""
 
-    alpha = np.arange(0.5,0.9,0.1)
-    gamma = np.arange(0.5,0.9,0.1)
+    alpha = np.arange(0.1,0.9,0.1)
+    gamma = np.arange(0.1,0.9,0.1)
     minTimeStep = 10000
     minAlpha = 0
     minGamma = 0
