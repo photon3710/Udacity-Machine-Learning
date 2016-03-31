@@ -12,9 +12,10 @@ class LearningAgent(Agent):
         self.color = 'red'  # override color
         self.planner = RoutePlanner(self.env, self)  # simple route planner to get next_waypoint
         # TODO: Initialize any additional variables here
-        self.alpha = alpha	
+        self.alpha0 = alpha
+        self.alpha = alpha
         self.gamma = gamma
-        self.epsilon = 0.01 # small possibility to choose feasible actions randomly
+        self.epsilon = 1 # small possibility to choose feasible actions randomly
         self.Q = np.zeros((12,4))
         # Metric parameters
         self.count = 0 # randomly choosing the actions before using the Q values
@@ -28,14 +29,15 @@ class LearningAgent(Agent):
     def reset(self, destination=None):
         # record the previous settings
         # print "deadline step = {}, time step = {}, penalty number = {}".format(self.env.get_deadline(self), self.timeStep, self.penaltyNum) # [debug]
-        if self.trialNum > 100 and self.trialNum <= 110:
-            self.totalTimeStep += self.timeStep
-            if self.maxDeadline < self.timeStep or self.penaltyNum != 0:
+        if self.trialNum > 100 and self.trialNum <= 150:            
+            if self.timeStep <= self.maxDeadline  and self.penaltyNum == 0:
+                self.totalTimeStep += self.timeStep               
+            else:
                 self.alwaysSafelyReachDestination = False
                    
         self.planner.route_to(destination)
         # TODO: Prepare for a new trip; reset any variables here, if required 
-        self.trialNum += 1        
+        self.trialNum += 1         
         self.timeStep = 0
         self.penaltyNum = 0
         self.maxDeadline = self.env.get_deadline(self)
@@ -50,32 +52,23 @@ class LearningAgent(Agent):
         self.state = (self.next_waypoint, inputs['light'], inputs['left'], inputs['oncoming'])        
         s = self.getStateIndex(self.state)
 		       		
-        # TODO: Select action according to your policy        
-        if self.count < 200:       
+        # TODO: Select action according to your policy 
+        if self.count < 300:       
             a = random.choice( [0, 1, 2, 3] )
         else:
-            if random.uniform(0, 1) < self.epsilon:
-                if (s-s%3)/3 == 0:
-                    a = random.choice( [3] )
-                elif (s-s%3)/3 == 1:
-                    a = random.choice( [0, 3] )
-                elif (s-s%3)/3 == 2:
-                    a = random.choice( [0,1,3] )
-                elif (s-s%3)/3 == 3:  
-                    a = random.choice( [0,1,2,3] )
-            else:
+            if self.trialNum <= 100 and random.uniform(0, 1) < self.epsilon: 
+                a = random.choice( [0, 1, 2, 3] )           
+            else:          
                 a = random.choice( np.argwhere( self.Q[s,:] == np.amax( self.Q[s,:] ) ).flatten() )
-        self.count += 1
-        self.timeStep += 1
         
         if a == 0:
-            action = 'right'
+            action = None
         elif a == 1:
-            action = 'forward'
+            action = 'right'
         elif a == 2:
-            action = 'left'
+            action = 'forward'
         else:
-		    action = None
+		    action = 'left'
 
         # Execute action and get reward
         reward = self.env.act(self, action)
@@ -89,13 +82,21 @@ class LearningAgent(Agent):
         sNext = self.getStateIndex(self.state)
 		
         self.Q[s,a] = (1-self.alpha) * self.Q[s,a] + self.alpha * ( reward + self.gamma * np.amax(self.Q[sNext,:]) )
+        
+        # update epsilon, which gradually changes the agent from exploration to exploitation.
+               
+        self.count += 1
+        self.timeStep += 1
+        
+        self.epsilon = 1. / self.trialNum
+        # self.alpha = self.alpha0 / self.trialNum
 
         # print "LearningAgent.update(): deadline = {}, inputs = {}, action = {}, reward = {}".format(deadline, inputs, action, reward)  # [debug]
 
     def getStateIndex(self, state):
-        if state[0] == 'forward':
+        if state[0] == 'right':
             n = 0
-        elif state[0] == 'right':
+        elif state[0] == 'forward':
             n = 1
         elif state[0] == 'left':
             n = 2
@@ -113,8 +114,8 @@ class LearningAgent(Agent):
 def run():
     """Run the agent for a finite number of trials."""
 
-    alpha = np.arange(0.1,0.9,0.1)
-    gamma = np.arange(0.1,0.9,0.1)
+    alpha = np.arange(0.1,1.01,0.1)
+    gamma = np.arange(0.1,1.01,0.1)
     minTimeStep = 10000
     minAlpha = 0
     minGamma = 0
@@ -140,7 +141,7 @@ def run():
                     minQ = a.Q
     
     print "minTimeStep = {}, minAlpha = {}, minGamma = {}".format(minTimeStep, minAlpha, minGamma)
-    print a.Q
+    print round(a.Q,2)
 
 if __name__ == '__main__':
     run()
