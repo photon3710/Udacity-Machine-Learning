@@ -68,7 +68,7 @@ class LearningAgent(Agent):
         elif a == 2:
             action = 'forward'
         else:
-		    action = 'left'
+	    action = 'left'
 
         # Execute action and get reward
         reward = self.env.act(self, action)
@@ -113,7 +113,7 @@ class LearningAgent(Agent):
 
 def run():
     """Run the agent for a finite number of trials."""
-
+    np.set_printoptions(suppress=True)	
     alpha = np.arange(0.1,1.01,0.1)
     gamma = np.arange(0.1,1.01,0.1)
     minTimeStep = 10000
@@ -130,7 +130,7 @@ def run():
             e.set_primary_agent(a, enforce_deadline=True)  # set agent to track
             # Now simulate it
             sim = Simulator(e, update_delay=0.01)  # reduce update_delay to speed up simulation
-            sim.run(n_trials=111)  # press Esc or close pygame window to quit
+            sim.run(n_trials=151)  # press Esc or close pygame window to quit
             
             # Metric check: the smart car does not violate the traffic law and always reaches the destination in the 10 testing routines. 
             if a.alwaysSafelyReachDestination:
@@ -141,7 +141,7 @@ def run():
                     minQ = a.Q
     
     print "minTimeStep = {}, minAlpha = {}, minGamma = {}".format(minTimeStep, minAlpha, minGamma)
-    print round(a.Q,2)
+    print minQ
 
 if __name__ == '__main__':
     run()
