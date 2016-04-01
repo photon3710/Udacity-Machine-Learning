@@ -15,48 +15,41 @@ class LearningAgent(Agent):
         self.alpha0 = alpha
         self.alpha = alpha
         self.gamma = gamma
-        self.epsilon = 1 # small possibility to choose feasible actions randomly
+        self.epsilon = 1 # small possibility to choose feasible actions randomly        
         self.Q = np.zeros((12,4))
         # Metric parameters
         self.count = 0 # randomly choosing the actions before using the Q values
         self.timeStep = 0 # time cost
-        self.totalTimeStep = 0
-        self.penaltyNum = 0 # number of violation of traffic laws during the 10 testing routes from 101 to 110
-        self.maxDeadline = 0
         self.trialNum = 0 # number of trials
-        self.alwaysSafelyReachDestination = True # whether does the car reach the destination successfully and safely during the 10 testing routes from 101 to 110
-
+        
+        
     def reset(self, destination=None):
         # record the previous settings
         # print "deadline step = {}, time step = {}, penalty number = {}".format(self.env.get_deadline(self), self.timeStep, self.penaltyNum) # [debug]
-        if self.trialNum > 100 and self.trialNum <= 150:            
-            if self.timeStep <= self.maxDeadline  and self.penaltyNum == 0:
-                self.totalTimeStep += self.timeStep               
-            else:
-                self.alwaysSafelyReachDestination = False
                    
         self.planner.route_to(destination)
         # TODO: Prepare for a new trip; reset any variables here, if required 
-        self.trialNum += 1         
+        if self.count >= 300:
+            self.trialNum += 1  
+            self.epsilon = 1. / self.trialNum # the training strategy is to shift the training from exploration to exploitation.
+            # self.alpha = self.alpha0 / self.trialNum        
         self.timeStep = 0
-        self.penaltyNum = 0
-        self.maxDeadline = self.env.get_deadline(self)
+        
 
     def update(self, t):
         # Gather inputs
-        self.next_waypoint = self.planner.next_waypoint()  # from route planner, also displayed by simulator
-        inputs = self.env.sense(self)
         deadline = self.env.get_deadline(self)
-
+        self.next_waypoint = self.planner.next_waypoint()  # from route planner, also displayed by simulator
+        inputs = self.env.sense(self)       
         # TODO: Update state
         self.state = (self.next_waypoint, inputs['light'], inputs['left'], inputs['oncoming'])        
         s = self.getStateIndex(self.state)
 		       		
         # TODO: Select action according to your policy 
-        if self.count < 300:       
+        if self.count < 300:    # fully randomly choosing actions at the beginneing of the training   
             a = random.choice( [0, 1, 2, 3] )
         else:
-            if self.trialNum <= 100 and random.uniform(0, 1) < self.epsilon: 
+            if random.uniform(0, 1) < self.epsilon:  # With the probability epsilon, the car will choose randomly to explore
                 a = random.choice( [0, 1, 2, 3] )           
             else:          
                 a = random.choice( np.argwhere( self.Q[s,:] == np.amax( self.Q[s,:] ) ).flatten() )
@@ -68,28 +61,22 @@ class LearningAgent(Agent):
         elif a == 2:
             action = 'forward'
         else:
-	    action = 'left'
+		    action = 'left'
 
         # Execute action and get reward
         reward = self.env.act(self, action)
-        # Record the number of violation of traffic laws
-        if reward < 0:
-            self.penaltyNum += 1
 
         # TODO: Learn policy based on state, action, reward
         self.next_waypoint = self.planner.next_waypoint()  # from route planner, also displayed by simulator
         inputs = self.env.sense(self)
+        self.state = (self.next_waypoint, inputs['light'], inputs['left'], inputs['oncoming']) 
         sNext = self.getStateIndex(self.state)
 		
         self.Q[s,a] = (1-self.alpha) * self.Q[s,a] + self.alpha * ( reward + self.gamma * np.amax(self.Q[sNext,:]) )
         
-        # update epsilon, which gradually changes the agent from exploration to exploitation.
-               
+        # update epsilon, which gradually changes the agent from exploration to exploitation.       
         self.count += 1
         self.timeStep += 1
-        
-        self.epsilon = 1. / self.trialNum
-        # self.alpha = self.alpha0 / self.trialNum
 
         # print "LearningAgent.update(): deadline = {}, inputs = {}, action = {}, reward = {}".format(deadline, inputs, action, reward)  # [debug]
 
@@ -109,14 +96,15 @@ class LearningAgent(Agent):
             s = 2
         else:
             s = 3
+            
         return s*3+n
 
 def run():
     """Run the agent for a finite number of trials."""
-    np.set_printoptions(suppress=True)	
+    np.set_printoptions(suppress=True)
     alpha = np.arange(0.1,1.01,0.1)
     gamma = np.arange(0.1,1.01,0.1)
-    minTimeStep = 10000
+    maxQOptimalActionNumber = 0
     minAlpha = 0
     minGamma = 0
     minQ = []
@@ -130,18 +118,31 @@ def run():
             e.set_primary_agent(a, enforce_deadline=True)  # set agent to track
             # Now simulate it
             sim = Simulator(e, update_delay=0.01)  # reduce update_delay to speed up simulation
-            sim.run(n_trials=151)  # press Esc or close pygame window to quit
+            sim.run(n_trials=101)  # press Esc or close pygame window to quit
             
-            # Metric check: the smart car does not violate the traffic law and always reaches the destination in the 10 testing routines. 
-            if a.alwaysSafelyReachDestination:
-                if minTimeStep > a.totalTimeStep:
-                    minTimeStep = a.totalTimeStep
-                    minAlpha = al
-                    minGamma = ga
-                    minQ = a.Q
+            # Metric check: the Q learning matrix has the maximum number of optimal acitons which are represend by the maximum value of each state(row). 
+            qOptimal = checkQError(a.Q)
+            if qOptimal > maxQOptimalActionNumber:
+                maxQOptimalActionNumber = qOptimal
+                minAlpha = al
+                minGamma = ga
+                minQ = a.Q
     
-    print "minTimeStep = {}, minAlpha = {}, minGamma = {}".format(minTimeStep, minAlpha, minGamma)
+    print "minAlpha = {}, minGamma = {}, qOptimal = {}".format(minAlpha, minGamma, maxQOptimalActionNumber)    
     print minQ
+    
+def checkQError(q):
+    qOptimalActionNumber = 0
+    optimal = [0.,0.,0.,1.,0.,0.,1.,2.,0.,1.,2.,3.] #optimal actions
+    
+    for s in range(4):
+        for n in range(3):                                                                              
+            state = s*3 + n
+            oa = np.argwhere( q[state,:] == np.amax( q[state,:] ) ).flatten()
+            if len(oa) == 1 and oa[0] == optimal[state]:
+                qOptimalActionNumber += 1
+                
+    return qOptimalActionNumber
 
 if __name__ == '__main__':
     run()
