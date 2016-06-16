@@ -1,0 +1,457 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf460
+{\fonttbl\f0\fswiss\fcharset0 ArialMT;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red49\green112\blue185;\red51\green51\blue51;\red0\green0\blue255;
+\red0\green128\blue0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{none\}}{\leveltext\leveltemplateid1\'00;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{none\}}{\leveltext\leveltemplateid101\'00;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{none\}}{\leveltext\leveltemplateid201\'00;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{none\}}{\leveltext\leveltemplateid301\'00;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid4}
+{\list\listtemplateid5\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{none\}}{\leveltext\leveltemplateid401\'00;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid5}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}{\listoverride\listid5\listoverridecount0\ls5}}
+\margl1440\margr1440\vieww28800\viewh15280\viewkind1
+\deftab720
+\pard\pardeftab720\sl340\partightenfactor0
+
+\f0\fs30 \cf0 \expnd0\expndtw0\kerning0
+\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trmarr2680 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth7593\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt133 \clpadl133 \clpadb133 \clpadr133 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth4873\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt133 \clpadl133 \clpadb133 \clpadr133 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sl720\partightenfactor0
+
+\b\fs64 \cf2 Capstone Project
+\b0\fs70 \cf0 \
+\pard\intbl\itap1\pardeftab720\sl360\partightenfactor0
+
+\b\fs38 \cf0 Machine Learning Engineer Nanodegree
+\b0\fs30 \cell 
+\pard\intbl\itap1\pardeftab720\sl320\qr\partightenfactor0
+
+\fs32 \cf0 Yongchao Tang
+\fs30 \
+\pard\intbl\itap1\pardeftab720\sl280\qr\partightenfactor0
+\cf0 \
+\pard\intbl\itap1\pardeftab720\sl320\qr\partightenfactor0
+
+\fs32 \cf0 June 8th, 2016
+\fs30 \cell \lastrow\row
+\pard\pardeftab720\sl340\partightenfactor0
+\cf0 \
+\
+\pard\pardeftab720\sl600\sa357\qc\partightenfactor0
+
+\b\fs54 \cf0 Definition
+\b0\fs30 \
+\pard\pardeftab720\sl360\sa373\partightenfactor0
+
+\b\fs32 \cf3 Project Overview
+\i\b0\fs30 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\qj\partightenfactor0
+
+\i0\fs24 \cf0 \kerning1\expnd0\expndtw0 In modern society, various kinds of navigation applications are necessary when people travel and commute, and have played more and more important roles in every aspect of our life. When we look for an address or a store in a map, an incorrect house number may cause to detour and result in delay for some important events. While accurate house numbers in maps are of major importance for users to locate their destinations, adding street numbers to geographic location databases is a challenging task. This is because exact street numbers are hard to collect and sort. Before the advent of navigation applications such as Google Maps, it is easy for us to find a range of house numbers in a zone, but not to spot an exact location for a specific street number. As the demand for the precise navigation of street numbers grows, how to extract street numbers from street view images such as those shot by Google street view cars has become a demanding yet meaningful task. \
+\pard\tx566\pardeftab720\sl340\partightenfactor0
+
+\fs30 \cf0 \expnd0\expndtw0\kerning0
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\qj\partightenfactor0
+
+\fs24 \cf0 \kerning1\expnd0\expndtw0 To be applied in location databases, the accuracy of transcribing house numbers from images should reach the human-level accuracy which is around 98% (Goodfellow et. al 2013). Considering the various sizes, colours, backgrounds and positions, we need to come up with some methods to recognize house numbers. \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\qj\partightenfactor0
+\cf0 Machine learning, especially deep learning method, can be a competitive candidate for such a task. Deep learning model does not need explicit programming of the recognition process. The deep learning does not require priori knowledge of the characters in images. The input data to train the deep learning model is the \'94Street View House Numbers" (SVHN) Dataset, which\expnd0\expndtw0\kerning0
+\'a0is a good large scale dataset collected from house numbers in Google Street View.
+\fs30  
+\fs24 \kerning1\expnd0\expndtw0 It holds more than 30K images for the training and 10K for the test. All images contain one to five digits in each house number. Also it has additional 200K images which are different from the train and test set. \
+\pard\tx566\pardeftab720\sl340\partightenfactor0
+
+\fs30 \cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\sl360\sa373\partightenfactor0
+
+\b\fs32 \cf3 Problem Statement
+\b0\fs30 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\qj\partightenfactor0
+
+\fs24 \cf0 \kerning1\expnd0\expndtw0 The target of the project is to d\expnd0\expndtw0\kerning0
+esign and implement a deep learning model that\kerning1\expnd0\expndtw0  can recognize and transcribe the whole house number in an image. My expected solution to the problem is to use the combination of deep neural net (DNN) and the convolutional neural network (CNN). \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 \
+A deep neural network (DNN) is composed of multiple hidden layer of units between the input and output layers. Each hidden layer consists of weights and biases, X*W+B = Y, where X is the input matrix coming from previous layer, Y is the output matrix which will be input to the next layer. To accommodate the non-linear classification, each layer also has a non-linear operation to transform the resulting matrix. The network is trained to minimize a loss function which defines the error of the training results compared with the expected targets.\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\qj\partightenfactor0
+\cf0 The convolutional neural networks (CNN) are inspired biologically from visual system of animals. The visual cells are sensitive to small sub-regions of the visual field. This sub-region is called a receptive field. The receptive fields are tiled to cover the entire visual field, and act as local filters over the input space. We can use a small matrix to represent the local field and do the matrix multiplication between this filter and a patch in an image. The results are the information we extract by the convolution operations. By moving the local field across the whole image, we actually transform the image into higher-dimension matrix from the original three-dimension (RGB format of images). The CNN can be applied to extract detailed information in an image which should be important for the recognition of sequence of digits. \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\qj\partightenfactor0
+\cf0 The whole strategy is to train six classifiers which share the input information but hold independent output layers. The sharing details of images are captured by CNN and input to the six classifiers. One classifier is to recognize the length of digits in an image, while the rest five classifiers are for the digits recognition. The train loss function is the sum of the log probability of each digit and the length of chains, argmax( log( P(s|m) ) ).  The prediction of the model can be obtained by calculating the sequence of digits with the largest sum of the log probabilities.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+
+\fs30 \cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\sl360\sa373\partightenfactor0
+
+\b\fs32 \cf3 Metrics
+\i\b0\fs30 \cf0 \
+\pard\tx566\pardeftab720\sl340\partightenfactor0
+
+\i0 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\qj\partightenfactor0
+
+\fs24 \cf0 \kerning1\expnd0\expndtw0 The metric of the model is straightforward and chosen as the accuracy of the predictions of the whole digit chain in each image of test dataset. No partial credit is given to the results because house numbers are helpful to users only when all digits of a house number are transcribed correctly. 
+\fs30 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\sl600\sa357\qc\partightenfactor0
+
+\b\fs54 \cf0 Analysis
+\b0\fs30 \
+\pard\pardeftab720\sl360\sa373\partightenfactor0
+
+\b\fs32 \cf3 Data Exploration
+\i\b0\fs30 \cf0 \
+\pard\tx566\pardeftab720\sl340\partightenfactor0
+
+\i0 \cf0 \
+\pard\tx566\pardeftab720\sl340\qj\partightenfactor0
+
+\fs24 \cf0 The SVHN dataset contains more than 30K images of house numbers for the training and more than 10K for the test. There are also an extra images dataset containing more than 200K images for the training if needed. I used the mixture of training dataset and the extra dataset for training. The validation dataset is chosen randomly from the training dataset. The sizes of training, test and validation are 225988, 13068 and 10000, respectively. The number of digits in each image ranges from one to six. \
+\
+\pard\tx566\pardeftab720\sl340\qj\partightenfactor0
+
+\fs30 \cf0 \
+\pard\pardeftab720\sl360\sa373\partightenfactor0
+\ls1\ilvl0
+\b\fs32 \cf3 Exploratory Visualization
+\fs38 \
+\pard\tx566\pardeftab720\sl340\qj\partightenfactor0
+\ls1\ilvl0
+\b0\fs24 \cf0 Some original images are shown below:\
+\pard\tx566\pardeftab720\sl340\partightenfactor0
+\ls1\ilvl0
+\fs30 \cf0 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\ls1\ilvl0
+\fs28 \cf0 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+{{\NeXTGraphic unknown.png \width7280 \height3220 \noorient
+}¬}\
+\pard\pardeftab720\partightenfactor0
+\ls1\ilvl0
+\fs30 \cf0 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\ls1\ilvl0
+\fs28 \cf0 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+{{\NeXTGraphic 1__#$!@%!#__unknown.png \width7280 \height3260 \noorient
+}¬}\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\qj\partightenfactor0
+\ls1\ilvl0
+\fs24 \cf0 As it is shown, the images in the training dataset may have thoroughly different sizes and colours. The white boxes for each character is provided by the dataset, which can be used to train an object localizer. 
+\fs30 \
+\pard\pardeftab720\sl340\partightenfactor0
+\ls1\ilvl0\cf0 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl340\partightenfactor0
+\ls1\ilvl0\cf0 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\sl360\sa373\partightenfactor0
+
+\b\fs32 \cf3 Algorithms and Technique
+\b0\fs30 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\qj\partightenfactor0
+
+\fs24 \cf0 \kerning1\expnd0\expndtw0 My final architecture is composed of four convolution layers and six softmax classifiers. Four convolution layers are used to capture the details in an image and output to the six classifiers. They contain [64, 128, 160, 192] units, respectively. Each convolution layer has max pool operation and local response normalization. The window size for the max pool is 3*3*1, and the stride is 2*2*1. Dropouts are also applied to each convolution layer. All the non-linear operations of convolution layers are rectified linear units.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\qj\partightenfactor0
+\cf0 Every softmax classifier consists of two fully connected layers and one softmax layer. The two fully connected layers have [384, 192] units, respectively. The last sofmax layer has 7 or 11 output units. No dropout is applied to the classifier layers. The classifier for house number length has 7 classes, which are 0 - 5, and more than 5 digits, respectively. The classifiers for digit recognitions contain 11 classes, 10 classes for 10 digits 0 - 9 and last one is for a blank. \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\qj\partightenfactor0
+\cf0 I train the model by directly using SVHN. The mini-batch stochastic gradient descent is used. I choose the batch size of 64 by considering the memory size of my computer system. \
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 {{\NeXTGraphic Pasted Graphic 3.tiff \width11480 \height11300
+}¬}\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+
+\fs30 \cf0 \expnd0\expndtw0\kerning0
+\
+\pard\tx566\pardeftab720\sl340\partightenfactor0
+\cf0 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl340\qj\partightenfactor0
+\ls2\ilvl0\cf0 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+\
+\ls2\ilvl0\kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+\
+\ls2\ilvl0\kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\qj\partightenfactor0
+
+\fs24 \cf0 \kerning1\expnd0\expndtw0 The graph defined in tensorflow can be visualized with tensorboard. Every operation in the graph will be shown as an elliptical node under the \'93graphs\'94 tab in the tensorboard. The larger rounded rectangle represents the namespace for one layer. The size of the tensors flowing between two adjacent nodes are also shown. Five classifiers for the recognition of single digits is plotted at the bottom part of the graph, the last one for the length of house number is drawn on top of them.\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\qj\partightenfactor0
+
+\fs30 \cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\sl320\sa373\partightenfactor0
+
+\b \cf3 Benchmark
+\b0 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\qj\partightenfactor0
+
+\fs24 \cf0 \kerning1\expnd0\expndtw0 One existing benchmark is the results published in the paper (Goodfellow et. al 2013). This one should be plausible and achievable made by professional machine learning researchers. Their model achieved 96% for the multi-digit house numbers recognitions. \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\qj\partightenfactor0
+
+\fs30 \cf0 \expnd0\expndtw0\kerning0
+\
+\
+\
+\
+\
+\pard\pardeftab720\sl600\sa357\qc\partightenfactor0
+
+\b\fs54 \cf0 Methodology
+\b0\fs30 \
+\pard\pardeftab720\sl360\sa373\partightenfactor0
+
+\b\fs32 \cf3 Data Preprocessing
+\b0\fs30 \cf0 \
+\pard\pardeftab720\sl340\qj\partightenfactor0
+
+\fs24 \cf0 An important step before applying the model on the realistic dataset is to preprocess the images of SVHN. There are two reasons to preprocess the dataset: First, there may be some images with wrong labels and wrong digit boxes. For example, the image of 58819.png in the extra folder is labelled with 3 digits, but it actually holds only 2. \
+\pard\pardeftab720\sl340\partightenfactor0
+
+\fs28 \cf0 \
+\pard\pardeftab720\sl340\partightenfactor0
+
+\fs24 \cf0 \kerning1\expnd0\expndtw0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 {{\NeXTGraphic Pasted Graphic 5.tiff \width5500 \height5060
+}¬}\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\pardeftab720\sl340\partightenfactor0
+
+\fs28 \cf0 \expnd0\expndtw0\kerning0
+/extra/58819.png
+\fs24 \kerning1\expnd0\expndtw0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+
+\fs28 \cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\sl340\qj\partightenfactor0
+
+\fs24 \cf0 Second, the images in the dataset are not in uniform size. It would be difficult to be imported into tensorflow. To crop them with a same size, I first find the small rectangular bounding box that will contain individual character bounding boxes. I then expand this bounding box by 30% in both the x and the y direction, crop the image to that bounding box and resize the crop to 64 by 64 pixels. This process will induce considerable variability into processed digits sizes since images with same dimension will contain  one to five digits. 
+\fs30 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf0 {{\NeXTGraphic 2__#$!@%!#__unknown.png \width5060 \height5080 \noorient
+}¬}\pard\pardeftab720\partightenfactor0
+\cf0 \
+\pard\pardeftab720\partightenfactor0
+\cf0 {{\NeXTGraphic 3__#$!@%!#__unknown.png \width5060 \height5080 \noorient
+}¬}\pard\pardeftab720\partightenfactor0
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+
+\fs30 \cf0 \
+\pard\tx566\pardeftab720\sl340\qj\partightenfactor0
+
+\fs24 \cf0 Two preprocessed images containing the house number \'93113\'94 are shown above. The coordinates of the bounding box are transformed to the resized images proportionally. 
+\fs30 \
+\pard\tx566\pardeftab720\sl340\partightenfactor0
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx566\pardeftab720\sl340\partightenfactor0
+\cf0 \
+\pard\pardeftab720\sl360\sa373\partightenfactor0
+
+\b\fs32 \cf3 Implementation
+\b0\fs30 \cf0 \
+\pard\tx566\pardeftab720\sl340\qj\partightenfactor0
+
+\fs24 \cf0 After the images are resized to a uniform size, they are written into a file in the format of serialized string. The serialization can significantly compress the size of the dataset. The length and digits are stored in one-hot form and written to the file. \
+\
+With the help of the tf.decode_raw method, we can decode the serialization file and import the data into the model. Before input into the model, the images are also distorted by randomly flipped to left or right, added random brightness and contrast in order to increase the size of training dataset. Finally, the values in RGB of every image are subtracted by 128 and then divided by 128. This normalization is straightforward in the live camera android app.\
+\
+The algorithm generates a batch of images, lengths and digits with batch size 64 from a queue of examples. The data is then input into the model which is defined in the method \'93inference\'94 in the file \'93svhn.py\'94. The model has been discussed before. The gradient descent optimizer with initial learning rate 0.1 is applied and the learning rate will decay with a factor 0.1 per 100 epochs. The loss value to optimize is the sum of the cross entropies of softmax probabilities of all six classifiers. The L2 regularizations are applied to both two hidden layers in each classifier and are optimized along with the loss value. \
+\pard\tx566\pardeftab720\sl340\qj\partightenfactor0
+
+\b\fs38 \cf3 \
+\
+\pard\pardeftab720\sl360\sa373\partightenfactor0
+
+\fs32 \cf3 Refinement
+\fs38 \
+\pard\pardeftab720\sl340\qj\partightenfactor0
+
+\b0\fs24 \cf0 One of the improvements I made to the model is that I alternatively change the order of pooling op and normalization op in the four convolutional layers. This change could induce more variability in the model and make the model better with fewer parameters. 
+\fs30 \
+\pard\tx566\pardeftab720\sl340\qj\partightenfactor0
+
+\b\fs38 \cf3 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl340\partightenfactor0
+\ls3\ilvl0
+\b0\fs30 \cf0 \
+\pard\pardeftab720\sl600\sa357\qc\partightenfactor0
+
+\b\fs54 \cf0 Results
+\b0\fs30 \
+\pard\pardeftab720\sl360\sa373\partightenfactor0
+
+\b\fs32 \cf3 Model Evaluation and Validation
+\b0\fs30 \cf0 \
+\pard\tx566\pardeftab720\sl340\qj\partightenfactor0
+
+\fs24 \cf0 The training process is early terminated by checking the accuracy of the model on the validation dataset. If the accuracy of the model does not grow on the validation dataset,  I train 5K more steps and stop the training. Tuning of hyper-parameters are also based on the validation dataset. \kerning1\expnd0\expndtw0 My model reaches the accuracy 90.5% at steps 50K on the test dataset of SVHN with 13068 images: \
+At step 4K, loss = 3.81, accuracy on the test dataset is 43.7%;\
+At step 9K, loss = 1.79, accuracy on the test dataset is 81.6%;\
+At step 30K, loss = 0.69, accuracy on the test dataset is 89.1%;\
+At step 43K, loss = 1.2, accuracy on the test dataset is 90.1%;\
+At step 50K, loss = 1.09, accuracy on the test dataset is 90.5%;
+\fs30 \expnd0\expndtw0\kerning0
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 \kerning1\expnd0\expndtw0 {{\NeXTGraphic Pasted Graphic 9.tiff \width6640 \height4380
+}¬}\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \
+\
+The total loss levels off after 10K , but the prediction accuracy on the test dataset still grows. \
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+
+\f1 \cf0 {{\NeXTGraphic Pasted Graphic 11.tiff \width5940 \height8160
+}¬}\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 \
+\
+The plots above show the evolution of the weights and the biases of the classifier for the length of digit chains. 
+\f0 \
+\
+\
+\pard\pardeftab720\sl340\partightenfactor0
+
+\i\fs30 \cf4 \expnd0\expndtw0\kerning0
+Android app\
+\
+\pard\pardeftab720\sl340\qj\partightenfactor0
+
+\i0\fs24 \cf0 My model is exported to a file with the tensorflow protobuf extension. By importing it into the tensorflow android app example, I can use the model for a live camera stream. The resulting performance of the camera app is not as good as that on SVHN dataset. I guess the down side of the live camera stream is the size of characters. It is not possible for my cellphone camera to capture a steady image with similar digit size as in training dataset. \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 \kerning1\expnd0\expndtw0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\sl340\partightenfactor0
+
+\i\fs30 \cf4 Document how you built the interface to your model.
+\i0 \cf0 \
+\
+\pard\pardeftab720\sl340\qj\partightenfactor0
+
+\fs24 \cf0 The interface to the my model is basically the same as in the original example except the inference process. In the file \'93tensorflow_jni.cc\'94, I change the variable \'93output_names\'94 to \kerning1\expnd0\expndtw0 std::vector<std::string> output_names (\{\cf5 "output_length"\cf0 , \cf5 "output_digit1"\cf0 , \cf5 "output_digit2"\cf0 , \cf5 "output_digit3"\cf0 , \cf5 "output_digit4"\cf0 , \cf5 "output_digit5\'94\cf0 \}), which includes all names of the output layers of six classifies. After running the model to get the inference probabilities, I call the method \'93GetTopN\'94 to get all the softmax probabilities exported by the classifier for house number length in descending order, and call the same method to return the digit with highest probability in each digit classifier. By multiplying the probabilities of length and corresponding digits, I can find the most possible house number.  \
+\pard\pardeftab720\sl340\partightenfactor0
+\cf0 \uc0\u8232 \
+\pard\pardeftab720\sl340\partightenfactor0
+
+\i\fs30 \cf4 \expnd0\expndtw0\kerning0
+Extensions: train a localizer\
+\
+\pard\pardeftab720\sl340\qj\partightenfactor0
+
+\i0\fs24 \cf0 To localize where the numbers are in the image, I trained a localizer by using the bounding boxes provided by the SVHN. First, I import the trained model for the house number classification. By making use of the extracted details from convolutional network, I built new fully connected layers for the coordinates of each digit. The coordinates of bounding boxes are normalized so that I can train the regression model with the sigmoid_cross_entropy loss function. 
+\fs30 \
+\pard\pardeftab720\sl340\partightenfactor0
+\cf0 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl340\partightenfactor0
+\ls4\ilvl0\cf0 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+\
+\ls4\ilvl0\kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\sl360\sa373\partightenfactor0
+\ls4\ilvl0
+\b\fs32 \cf3 Justification
+\fs38 \
+\pard\tx566\pardeftab720\sl340\qj\partightenfactor0
+
+\b0\fs24 \cf0 \kerning1\expnd0\expndtw0 My model does not perform better than the benchmark because the depth of my model is far less than the reported model. Deep learning is a heavily computational task. Without powerful computation hardware, it is hardly possible to achieve very high accuracy. 
+\fs30 \expnd0\expndtw0\kerning0
+\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl340\partightenfactor0
+\ls5\ilvl0\cf0 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+\
+\ls5\ilvl0\kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+\
+\ls5\ilvl0\kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+\
+\pard\tx566\pardeftab720\sl340\partightenfactor0
+\cf0 \
+\
+\
+\pard\pardeftab720\sl600\sa357\qc\partightenfactor0
+
+\b\fs54 \cf0 Conclusion
+\b0\fs30 \
+\pard\pardeftab720\sl360\sa373\partightenfactor0
+
+\b\fs32 \cf3 Free-Form Visualization\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\qj\partightenfactor0
+
+\b0\fs24 \cf0 \kerning1\expnd0\expndtw0 The image below shows how the android app runs after importing my pre-trained model. When the camera of the cellphone captures a picture with a house number, the transcribed house number is shown on the top of the screen, with the corresponding probability on the right. \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 {{\NeXTGraphic Pasted Graphic 8.tiff \width4100 \height7300
+}¬}\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+
+\b\fs38 \cf3 \expnd0\expndtw0\kerning0
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+
+\b0\fs30 \cf0 \
+\pard\pardeftab720\sl340\partightenfactor0
+\cf0 \
+\
+\
+\
+\pard\pardeftab720\sl360\sa373\partightenfactor0
+
+\b\fs32 \cf3 Reflection
+\b0\fs30 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\qj\partightenfactor0
+
+\fs24 \cf0 \kerning1\expnd0\expndtw0 As a newbie of Tensorflow and deep learning, I met lots of difficulties when trying to write and debug the whole algorithms, such as preprocessing the data, importing the images into model, and saving and restoring the trained model. Also, there are more challenges I had when I try to load the model into the android camera app and train a localizer. I have succeeded overcoming all those challenges and finish the project by running the algorithms smoothly without any bugs. However, the real challenge for me now emerges as the tuning of the model. \
+\
+The model is obtained by referring to the published one. In that paper from Goodfellow et. al, they report a 96% accuracy on the test dataset. Although they have more powerful hardware and GPU nodes, and trained a much deeper model than I did, I still want to improve the accuracy on my own computer. I tried to train the same model with only training dataset provided by SVHN website which includes around 33K images. I found the accuracy is stuck at 84% no matter 4 or 8 convolution layers are used. I know the dataset size is of same importance to the training of deep learning model as the depth of the model. \
+\
+I am trying to figure out whether it is possible to achieve a higher accuracy by training the limited layers of neural network. Researchers at google can achieve 96% accuracy on similar network structures with sharing weights among independent classifiers. I may try the recurrent network for this task as suggested in the project statement later. But as it is analyzed in the literature, recurrent network is much slower to be trained than convolution neural network.\
+\
+\
+\pard\pardeftab720\sl360\sa373\partightenfactor0
+
+\b\fs32 \cf3 \expnd0\expndtw0\kerning0
+Improvement
+\fs38 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\qj\partightenfactor0
+
+\b0\fs24 \cf0 \kerning1\expnd0\expndtw0 If I had access to the powerful computation resources, I could add more layers and try more different hyper parameters.}
