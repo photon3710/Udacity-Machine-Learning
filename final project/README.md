@@ -1,6 +1,6 @@
 # Tensorflow multi-digit street number recognizer
 
-## The alogorithms and results are saved in 'svhn' folder. 
+The alogorithms and results are saved in 'svhn' folder. 
 
 ## Under the 'svhn' folder: 
 
@@ -17,6 +17,6 @@
   Folder 'svhn_results' is where the cooresponding events and models are saved. 
     1. 'svhn_train' is where the training of the model is saved.
 
-## The data is located in the folder 'svhn_data' on the parent level. Thus the /svhn and /svhn_data should be located under the same folder.
+The data is located in the folder 'svhn_data' on the parent level. Thus the /svhn and /svhn_data should be located under the same folder.
 
 
